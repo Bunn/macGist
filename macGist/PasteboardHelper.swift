@@ -9,7 +9,6 @@
 import Foundation
 import AppKit
 
-
 struct PasteboardHelper {
     
     func getPasteboardString() -> String? {

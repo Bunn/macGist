@@ -29,6 +29,7 @@ enum Images {
 
 class Menu {
     fileprivate let item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    fileprivate let notificationHelper = NotificationHelper()
     
     func setupMenu() {
         item.image = Images.standardIcon.image
@@ -44,7 +45,7 @@ class Menu {
         
         item.menu = menu
     }
-    
+
     @objc fileprivate func quit() {
         NSApplication.shared().terminate(self)
     }
@@ -62,8 +63,8 @@ class Menu {
             if let value = string {
                 PasteboardHelper().save(string: value)
                 self.displaySuccessIcon()
+                self.notificationHelper.sendNotification(withIdentifier: value)
             }
         }
     }
 }
-
