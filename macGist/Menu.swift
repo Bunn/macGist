@@ -28,43 +28,79 @@ enum Images {
 }
 
 class Menu {
-    fileprivate let item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-    fileprivate let notificationHelper = NotificationHelper()
+    private let item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    private let notificationHelper = NotificationHelper()
+    var windowController: NSWindowController?
     
     func setupMenu() {
         item.image = Images.standardIcon.image
         let menu = NSMenu()
         
-        let gistMenuItem = NSMenuItem(title: "Create Gist", action: #selector(Menu.createGist), keyEquivalent: "g")
-        gistMenuItem.target = self
-        menu.addItem(gistMenuItem)
+        let githubAPI = GitHubAPI()
         
-        let quitMenuItem = NSMenuItem(title: "Quit", action: #selector(Menu.quit), keyEquivalent: "q")
+        if githubAPI.isAuthenticated {
+            let authenticatedItem = NSMenuItem(title: "Authenticated Gist", action: #selector(Menu.createAuthenticatedGist), keyEquivalent: "")
+            authenticatedItem.target = self
+            menu.addItem(authenticatedItem)
+        }
+        
+        let anonymousItem = NSMenuItem(title: "Anonymous Gist", action: #selector(Menu.createAnonymousGist), keyEquivalent: "")
+        anonymousItem.target = self
+        menu.addItem(anonymousItem)
+        
+        let settingsMenuItem = NSMenuItem(title: "Settings", action: #selector(Menu.openSettings), keyEquivalent: "")
+        settingsMenuItem.target = self
+        menu.addItem(settingsMenuItem)
+        
+        let quitMenuItem = NSMenuItem(title: "Quit", action: #selector(Menu.quit), keyEquivalent: "")
         quitMenuItem.target = self
         menu.addItem(quitMenuItem)
         
         item.menu = menu
     }
-
-    @objc fileprivate func quit() {
-        NSApplication.shared().terminate(self)
-    }
     
-    fileprivate func displaySuccessIcon() {
+    private func displaySuccessIcon() {
         item.image = Images.checkmarkIcon.image
         let deadlineTime = DispatchTime.now() + .seconds(2)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
             self.item.image = Images.standardIcon.image        }
     }
     
-    @objc fileprivate func createGist() {
+    private func postGist(authenticated: Bool) {
         guard let copiedItem = PasteboardHelper().getPasteboardString() else { return }
-        GitHubAPI().post(gist: copiedItem, fileExtension: "file", authenticated: false) { (error, string) in
+        GitHubAPI().post(gist: copiedItem, fileExtension: "file", authenticated: authenticated) { (error, string) in
             if let value = string {
                 PasteboardHelper().save(string: value)
                 self.displaySuccessIcon()
                 self.notificationHelper.sendNotification(withIdentifier: value)
             }
         }
+    }
+    
+    //MARK: - Button Methods
+    @objc private func openSettings() {
+        let settings = SettingsViewController()
+        settings.delegate = self
+        let window = NSWindow(contentViewController: settings)
+        windowController = NSWindowController(window: window)
+        windowController?.showWindow(self)
+    }
+    
+    @objc private func quit() {
+        NSApplication.shared().terminate(self)
+    }
+    
+    @objc fileprivate func createAuthenticatedGist() {
+        postGist(authenticated: true)
+    }
+    
+    @objc fileprivate func createAnonymousGist() {
+        postGist(authenticated: false)
+    }
+}
+
+extension Menu: SettingsViewControllerDelegate {
+    func didUpdateAuthStatus(controller: SettingsViewController) {
+        setupMenu()
     }
 }

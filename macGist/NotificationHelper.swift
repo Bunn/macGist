@@ -12,6 +12,8 @@ import AppKit
 class NotificationHelper : NSObject {
     
     func sendNotification(withIdentifier identifier: String) {
+        guard UserDefaults.standard.bool(forKey: UserDefaultKeys.notificationsKey.rawValue) == true else { return }
+        
         let notification = NSUserNotification()
         notification.title = "Gist URL Copied to your clipboard"
         notification.informativeText = "Click here to open it"
