@@ -14,8 +14,10 @@ You can download an unsigned version of the app [here](https://github.com/Bunn/m
 
 # Screenshots
 Settings Panel
+
 ![screenshot](./other/settings.png)
 
 macGist in action
+
 ![screenshot](./other/gist.gif)
 
