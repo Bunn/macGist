@@ -8,6 +8,14 @@ Be aware that it will replace your current clipboard with the Gist URL!
 You can download an unsigned version of the app [here](https://github.com/Bunn/macGist/releases/latest)
 
 
+# Features
+- Login into your GitHub account to send authenticated gists;
+- Enable/Disable notifications when gist is uploaded (Default is off);
+
 # Screenshots
+Settings Panel
+![screenshot](./other/settings.png)
+
+macGist in action
 ![screenshot](./other/gist.gif)
-![screenshot](./other/ss.png)
+
