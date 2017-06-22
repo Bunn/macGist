@@ -68,7 +68,8 @@ class Menu {
     
     private func postGist(authenticated: Bool) {
         guard let copiedItem = PasteboardHelper().getPasteboardString() else { return }
-        GitHubAPI().post(gist: copiedItem, fileExtension: "file", authenticated: authenticated) { (error, string) in
+
+        GitHubAPI().post(gist: copiedItem, fileExtension: PasteboardHelper().getFileExtension(), authenticated: authenticated) { (error, string) in
             if let value = string {
                 PasteboardHelper().save(string: value)
                 self.displaySuccessIcon()
