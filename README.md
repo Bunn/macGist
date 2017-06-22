@@ -1,5 +1,5 @@
-# macGist 
-[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=594c2ca838929b0001eee42e&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/594c2ca838929b0001eee42e/build/latest?branch=master)
+# macGist [![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=594c2ca838929b0001eee42e&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/594c2ca838929b0001eee42e/build/latest?branch=master)
+
 macGist is a simple app that sends your clipboard to GitHub's Gist and automatically copy the Gist URL into your Clipboard.. 
 
 Be aware that it will replace your current clipboard with the Gist URL!
