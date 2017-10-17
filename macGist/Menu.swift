@@ -18,9 +18,9 @@ enum Images {
         
         switch self {
         case .standardIcon:
-            image = NSImage(named: "icon")
+            image = NSImage(named: NSImage.Name(rawValue: "icon"))
         case .checkmarkIcon:
-            image = NSImage(named: "check_white_icon")
+            image = NSImage(named: NSImage.Name(rawValue: "check_white_icon"))
         }
         image?.isTemplate = true
         return image
@@ -28,7 +28,7 @@ enum Images {
 }
 
 class Menu {
-    private let item = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    private let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let notificationHelper = NotificationHelper()
     var windowController: NSWindowController?
     
@@ -88,7 +88,7 @@ class Menu {
     }
     
     @objc private func quit() {
-        NSApplication.shared().terminate(self)
+        NSApplication.shared.terminate(self)
     }
     
     @objc fileprivate func createAuthenticatedGist() {

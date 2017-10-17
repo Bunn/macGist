@@ -12,7 +12,7 @@ import AppKit
 struct PasteboardHelper {
     
     func getPasteboardString() -> String? {
-        let pasteboard = NSPasteboard.general()
+        let pasteboard = NSPasteboard.general
         if let copiedItems = pasteboard.readObjects(forClasses: [NSString.self], options: nil) {
             for item in copiedItems {
                 if let stringItem = item as? String {
@@ -29,7 +29,7 @@ struct PasteboardHelper {
      */
     func getFileExtension() -> String {
         let xcodeExtensionType = "DVTSourceTextViewLanguagePboardType"
-        guard let data = NSPasteboard.general().data(forType: xcodeExtensionType),
+        guard let data = NSPasteboard.general.data(forType: NSPasteboard.PasteboardType(rawValue: xcodeExtensionType)),
             let string = String(data: data, encoding: .utf8),
             let fileExtension = string.components(separatedBy: ".").last else { return "file" }
         
@@ -45,7 +45,7 @@ struct PasteboardHelper {
     }
     
     func save(string: String) {
-        let pasteboard = NSPasteboard.general()
+        let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         pasteboard.writeObjects([string as NSPasteboardWriting])
         
