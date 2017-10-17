@@ -29,7 +29,7 @@ extension NotificationHelper: NSUserNotificationCenterDelegate {
     func userNotificationCenter(_: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
         guard let identifier = notification.identifier else { return }
         guard let url = URL(string: identifier) else { return }
-        NSWorkspace.shared().open(url)
+        NSWorkspace.shared.open(url)
         NSUserNotificationCenter.default.removeDeliveredNotification(notification)
     }
 }

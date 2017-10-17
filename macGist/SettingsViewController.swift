@@ -35,7 +35,7 @@ class SettingsViewController: NSViewController {
             statusLabel.stringValue = "To post authenticated Gists"
         }
         
-        notificationsButton.state = UserDefaults.standard.integer(forKey: UserDefaultKeys.notificationsKey.rawValue)
+        notificationsButton.state = NSControl.StateValue(rawValue: UserDefaults.standard.integer(forKey: UserDefaultKeys.notificationsKey.rawValue))
     }
     
     @IBAction func notificationClicked(_ sender: NSButton) {
