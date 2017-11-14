@@ -17,10 +17,10 @@ enum GitHubCredential: String {
             let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else { fatalError("No plist found") }
         
         switch self {
-        case .clientSecret:
+        case .clientID:
             guard let value = dict["GitHubClientID"] as? String else { fatalError("GitHubClientID not found") }
             return value
-        case .clientID:
+        case .clientSecret:
             guard let value = dict["GitHubSecret"] as? String else { fatalError("GitHubSecret not found") }
             return value
         }

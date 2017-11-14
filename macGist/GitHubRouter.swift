@@ -20,6 +20,7 @@ enum GitHubRouter {
         switch self {
         case .auth:
             return "authorizations/clients/\(GitHubCredential.clientID.rawValue)/\(UUID.init())"
+            return "authorizations/clients/\(GitHubCredential.clientID.value)/\(UUID.init())"
         case .gist( _ , let authenticated):
             if authenticated {
                 guard let token = GitHubAPI().token else { fatalError("No Token") }

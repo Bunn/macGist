@@ -95,7 +95,7 @@ struct GitHubAPI {
     
     func authenticate (username: String, password: String, twoFactorCode: String? = nil, completion: @escaping (Error?) -> Void) {
         let scopes = ["gist"]
-        let params  = ["client_secret" : GitHubCredential.clientSecret.rawValue,
+        let params  = ["client_secret" : GitHubCredential.clientSecret.value,
                        "scopes" : scopes,
                        "note" : "testNote"] as [String : Any]
         
