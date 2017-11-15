@@ -41,6 +41,19 @@ struct GitHubAPI {
     
     //MARK: - Public Functions
     
+    func fetchGists() {
+        guard let request = GitHubRouter.gists.request else {
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : Any]] {
+                print(json)
+            }
+        }
+        task.resume()
+    }
+    
     func logout() {
         do {
             try Keychain().deleteItem()
