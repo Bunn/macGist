@@ -34,7 +34,7 @@ enum GitHubRouter {
                 return "gists"
             }
         case .gists:
-            return "users/\("usernameToTest")/gists?access_token=\(accessToken)"
+            return "gists?access_token=\(accessToken)"
         case .user:
             return "user?access_token=\(accessToken)"
         }
