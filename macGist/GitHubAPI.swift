@@ -63,11 +63,19 @@ struct GitHubAPI {
         task.resume()
     }
     
-    func fetchGists() {
+    func fetchGists(completion: @escaping (Error?, [Gist]?) -> Void) {
         guard let request = GitHubRouter.gists.request else { return }
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as! [[String : Any]] {
-                print(json)
+            guard let data = data, error == nil else {
+                completion(GitHubAPIError.invalidJSON, nil)
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                let gists = try decoder.decode([Gist].self, from: data)
+                completion(nil, gists)
+            } catch {
+                completion(error, nil)
             }
         }
         task.resume()
