@@ -12,6 +12,7 @@
 		3100E52F1EF9CEA50065BDD9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100E52D1EF9CEA50065BDD9 /* LoginViewController.swift */; };
 		3100E5301EF9CEA50065BDD9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3100E52E1EF9CEA50065BDD9 /* LoginViewController.xib */; };
 		3160CFC71FC4CE0A00B3E756 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160CFC61FC4CE0A00B3E756 /* Gist.swift */; };
+		3160CFC91FC4D49200B3E756 /* GistFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160CFC81FC4D49200B3E756 /* GistFile.swift */; };
 		317029881EFA9F9F00A087F8 /* TwoFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317029861EFA9F9F00A087F8 /* TwoFactorViewController.swift */; };
 		317029891EFA9F9F00A087F8 /* TwoFactorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 317029871EFA9F9F00A087F8 /* TwoFactorViewController.xib */; };
 		317A342F1EF9F64B005144BB /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A342E1EF9F64B005144BB /* UserDefaultKeys.swift */; };
@@ -35,6 +36,7 @@
 		3100E52D1EF9CEA50065BDD9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3100E52E1EF9CEA50065BDD9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		3160CFC61FC4CE0A00B3E756 /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
+		3160CFC81FC4D49200B3E756 /* GistFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistFile.swift; sourceTree = "<group>"; };
 		317029861EFA9F9F00A087F8 /* TwoFactorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		317029871EFA9F9F00A087F8 /* TwoFactorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoFactorViewController.xib; sourceTree = "<group>"; };
 		317A342E1EF9F64B005144BB /* UserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				318087781EF5D9CA001712F4 /* GitHubRouter.swift */,
 				319074FE1FBCE725008D068F /* User.swift */,
 				3160CFC61FC4CE0A00B3E756 /* Gist.swift */,
+				3160CFC81FC4D49200B3E756 /* GistFile.swift */,
 			);
 			name = GitHub;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3160CFC91FC4D49200B3E756 /* GistFile.swift in Sources */,
 				319074FF1FBCE725008D068F /* User.swift in Sources */,
 				319D3BA51ED50246000D4245 /* Menu.swift in Sources */,
 				318087791EF5D9CA001712F4 /* GitHubAPI.swift in Sources */,

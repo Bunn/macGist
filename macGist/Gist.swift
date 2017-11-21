@@ -9,11 +9,20 @@
 import Foundation
 
 class Gist: Codable {
-    let url: String
+    let url: URL
     let identifier: String
+    let publicItem: Bool
+    let createdAt: Date
+    let updatedAt: Date
+   // let files: Dictionary<String, GistFile>
+
     
     enum CodingKeys: String, CodingKey {
         case url
         case identifier = "id"
+        case publicItem = "public"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+        //case files
     }
 }

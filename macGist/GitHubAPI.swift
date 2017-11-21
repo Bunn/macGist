@@ -72,9 +72,11 @@ struct GitHubAPI {
             }
             do {
                 let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
                 let gists = try decoder.decode([Gist].self, from: data)
                 completion(nil, gists)
             } catch {
+                print("Error \(error)")
                 completion(error, nil)
             }
         }
