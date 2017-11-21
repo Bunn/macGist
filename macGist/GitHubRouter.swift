@@ -12,6 +12,7 @@ enum GitHubRouter {
     case auth([String : Any])
     case gist([String : Any], Bool)
     case gists
+    case user
     
     private var basePath: String {
         return "https://api.github.com"
@@ -34,6 +35,8 @@ enum GitHubRouter {
             }
         case .gists:
             return "users/\("usernameToTest")/gists?access_token=\(accessToken)"
+        case .user:
+            return "user?access_token=\(accessToken)"
         }
     }
         
@@ -43,7 +46,7 @@ enum GitHubRouter {
             return "PUT"
         case .gist:
             return "POST"
-        case .gists:
+        case .gists, .user:
             return "GET"
         }
     }
@@ -53,7 +56,7 @@ enum GitHubRouter {
         case .auth(let params), .gist(let params, _):
             let jsonData = try? JSONSerialization.data(withJSONObject: params)
             return jsonData
-        case .gists:
+        case .gists, .user:
             return nil
         }
     }
