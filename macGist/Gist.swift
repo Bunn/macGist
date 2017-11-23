@@ -8,14 +8,23 @@
 
 import Foundation
 
-class Gist: Codable {
+struct Gist: Codable {
     let url: URL
     let identifier: String
     let publicItem: Bool
     let createdAt: Date
     let updatedAt: Date
-   // let files: Dictionary<String, GistFile>
-
+    
+    /*
+     GitHub API returns the files inside a dictionary with dynamic keys instead of an array
+     the files property is a mapping one to one to the API, which is an object that contains multiple objects
+     gistFiles is just a flatMap on files to access the files as an array.
+     This can probably be improved at encoding time, but I decided to mantain the GitHub API structure for now.
+    */
+    private let files: GistFiles
+    var gistFiles : [GistFile] {
+        return files.gists.flatMap{$0}
+    }
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -23,6 +32,6 @@ class Gist: Codable {
         case publicItem = "public"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        //case files
+        case files
     }
 }

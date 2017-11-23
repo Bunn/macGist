@@ -8,16 +8,40 @@
 
 import Foundation
 
-class GistFile: Codable {
-    let filename: String
+struct GistFile : Codable {
+    let name: String
     let type: String
-    var language: String
+    let language: String?
     let rawURL: URL
+}
 
-    enum CodingKeys: String, CodingKey {
-        case filename
-        case type
-        case language
-        case rawURL = "raw_url"
+struct GistFiles: Codable {
+    let gists : [GistFile]
+    
+    struct GistFileKey : CodingKey {
+        var stringValue: String
+        init?(stringValue: String) {
+            self.stringValue = stringValue
+        }
+        var intValue: Int? { return nil }
+        init?(intValue: Int) { return nil }
+        
+        static let type = GistFileKey(stringValue: "type")!
+        static let url = GistFileKey(stringValue: "raw_url")!
+        static let language = GistFileKey(stringValue: "language")!
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: GistFileKey.self)
+        
+        var styles: [GistFile] = []
+        for key in container.allKeys {
+            let nested = try container.nestedContainer(keyedBy: GistFileKey.self, forKey: key)
+            let type = try nested.decode(String.self, forKey: .type)
+            let url = try nested.decode(URL.self, forKey: .url)
+            let language = try? nested.decode(String.self, forKey: .language)
+            styles.append(GistFile(name: key.stringValue, type: type, language:language, rawURL: url))
+        }
+        self.gists = styles
     }
 }
