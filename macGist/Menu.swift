@@ -52,10 +52,15 @@ class Menu {
         settingsMenuItem.target = self
         menu.addItem(settingsMenuItem)
         
+        if githubAPI.isAuthenticated {
+            let gistsMenuItem = NSMenuItem(title: "Gists", action: #selector(Menu.opeGists), keyEquivalent: "")
+            gistsMenuItem.target = self
+            menu.addItem(gistsMenuItem)
+        }
         let quitMenuItem = NSMenuItem(title: "Quit", action: #selector(Menu.quit), keyEquivalent: "")
         quitMenuItem.target = self
         menu.addItem(quitMenuItem)
-        
+
         item.menu = menu
     }
     
@@ -79,6 +84,14 @@ class Menu {
     }
     
     //MARK: - Button Methods
+    
+    @objc private func opeGists() {
+        let gists = GistSplitViewController()
+        let window = NSWindow(contentViewController: gists)
+        windowController = NSWindowController(window: window)
+        windowController?.showWindow(self)
+    }
+    
     @objc private func openSettings() {
         let settings = SettingsViewController()
         settings.delegate = self

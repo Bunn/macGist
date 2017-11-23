@@ -14,6 +14,7 @@ struct Gist: Codable {
     let publicItem: Bool
     let createdAt: Date
     let updatedAt: Date
+    let description: String
     
     /*
      GitHub API returns the files inside a dictionary with dynamic keys instead of an array
@@ -28,6 +29,7 @@ struct Gist: Codable {
     
     enum CodingKeys: String, CodingKey {
         case url
+        case description
         case identifier = "id"
         case publicItem = "public"
         case createdAt = "created_at"
