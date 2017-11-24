@@ -34,14 +34,14 @@ struct GistFiles: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: GistFileKey.self)
         
-        var styles: [GistFile] = []
+        var gists: [GistFile] = []
         for key in container.allKeys {
             let nested = try container.nestedContainer(keyedBy: GistFileKey.self, forKey: key)
             let type = try nested.decode(String.self, forKey: .type)
             let url = try nested.decode(URL.self, forKey: .url)
             let language = try? nested.decode(String.self, forKey: .language)
-            styles.append(GistFile(name: key.stringValue, type: type, language:language, rawURL: url))
+            gists.append(GistFile(name: key.stringValue, type: type, language:language, rawURL: url))
         }
-        self.gists = styles
+        self.gists = gists
     }
 }
