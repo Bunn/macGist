@@ -34,6 +34,14 @@ class GistListViewController: NSViewController {
             }
         }
     }
+    
+    private func updateTableSelection() {
+        tableView.enumerateAvailableRowViews { (rowView, row) in
+            if let cell = rowView.view(atColumn: 0) as?  GistCell {
+                cell.selected = rowView.isSelected
+            }
+        }
+    }
 }
 
 extension GistListViewController: NSTableViewDataSource {
@@ -46,10 +54,14 @@ extension GistListViewController: NSTableViewDataSource {
 extension GistListViewController: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cell"), owner: self) as? NSTableCellView
+        let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "GistCell"), owner: self) as? GistCell
         let gist = gists[row]
-        cell?.textField?.stringValue = gist.description
+        cell?.gist = gist
         return cell
+    }
+    
+    func tableViewSelectionIsChanging(_ notification: Notification) {
+        updateTableSelection()
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
@@ -57,5 +69,6 @@ extension GistListViewController: NSTableViewDelegate {
             let gist = gists[tableView.selectedRow]
             delegate?.didSelect(gist: gist, controller: self)
         }
+        updateTableSelection()
     }
 }

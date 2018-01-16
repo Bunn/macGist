@@ -15,6 +15,7 @@ class GistSplitViewController: NSSplitViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.frame = NSMakeRect(0, 0, 850, 650)
         setupSplitView()
     }
     
