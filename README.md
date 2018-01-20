@@ -15,13 +15,14 @@ You can download an unsigned version of the app [here](https://github.com/Bunn/m
 - View gist list
 
 # Screenshots
+macGist in action
+
+![screenshot](./other/gist.gif)
+
 Settings Panel
 
 ![screenshot](./other/settings.png)
 
-macGist in action
-
-![screenshot](./other/gist.gif)
 
 gist List
 ![screenshot](./other/gistList.png)
