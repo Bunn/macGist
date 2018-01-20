@@ -15,6 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let menu = Menu()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        NSApplication.shared.setActivationPolicy(.accessory)
         menu.setupMenu()
     }
     

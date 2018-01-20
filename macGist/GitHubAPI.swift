@@ -41,6 +41,48 @@ struct GitHubAPI {
     
     //MARK: - Public Functions
     
+    func fetchUser(completion: @escaping (Error?, User?) -> Void) {
+        guard let request = GitHubRouter.user.request else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let decoder = JSONDecoder()
+            guard let data = data
+                else {
+                    completion(GitHubAPIError.invalidJSON, nil)
+                    return
+            }
+            
+            do {
+                let user = try decoder.decode(User.self, from: data)
+                completion(nil, user);
+            } catch {
+                completion(error, nil);
+            }
+        }
+        task.resume()
+    }
+    
+    func fetchGists(completion: @escaping (Error?, [Gist]?) -> Void) {
+        guard let request = GitHubRouter.gists.request else { return }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data, error == nil else {
+                completion(GitHubAPIError.invalidJSON, nil)
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let gists = try decoder.decode([Gist].self, from: data)
+                completion(nil, gists)
+            } catch {
+                print("Error \(error)")
+                completion(error, nil)
+            }
+        }
+        task.resume()
+    }
+    
     func logout() {
         do {
             try Keychain().deleteItem()
@@ -87,6 +129,8 @@ struct GitHubAPI {
                 if let htmlURL = json["html_url"] as? String {
                     completion(nil, htmlURL)
                 }
+            } else {
+                completion(GitHubAPIError.invalidJSON, nil)
             }
         }
         
@@ -150,6 +194,7 @@ struct GitHubAPI {
     
     
     //MARK: - Private Functions
+    
     
     fileprivate func base64Login(username: String, password: String) -> String {
         let loginString = "\(username):\(password)"

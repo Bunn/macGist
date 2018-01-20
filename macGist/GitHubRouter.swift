@@ -11,42 +11,58 @@ import Foundation
 enum GitHubRouter {
     case auth([String : Any])
     case gist([String : Any], Bool)
-
-    var basePath: String {
+    case gists
+    case user
+    
+    private var basePath: String {
         return "https://api.github.com"
     }
     
-    var path: String {
+    private var accessToken: String {
+        guard let token = GitHubAPI().token else { fatalError("No Token") }
+        return token
+    }
+    
+    private var path: String {
         switch self {
         case .auth:
-            return "authorizations/clients/\(GitHubCredential.clientID.rawValue)/\(UUID.init())"
             return "authorizations/clients/\(GitHubCredential.clientID.value)/\(UUID.init())"
         case .gist( _ , let authenticated):
             if authenticated {
-                guard let token = GitHubAPI().token else { fatalError("No Token") }
-                return "gists?access_token=\(token)"
+                return "gists?access_token=\(accessToken)"
             } else {
                 return "gists"
             }
+        case .gists:
+            return "gists?access_token=\(accessToken)"
+        case .user:
+            return "user?access_token=\(accessToken)"
         }
     }
-    
-    var method: String {
+        
+    private var method: String {
         switch self {
         case .auth:
             return "PUT"
         case .gist:
             return "POST"
+        case .gists, .user:
+            return "GET"
         }
     }
     
-    var httpBody: Data? {
+    private var httpBody: Data? {
         switch self {
         case .auth(let params), .gist(let params, _):
             let jsonData = try? JSONSerialization.data(withJSONObject: params)
             return jsonData
+        case .gists, .user:
+            return nil
         }
     }
+    
+    
+    //MARK: - Public Functions
     
     var request: URLRequest? {
         guard let url = URL(string: "\(basePath)/\(path)") else {

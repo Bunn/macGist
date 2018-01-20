@@ -12,13 +12,18 @@ You can download an unsigned version of the app [here](https://github.com/Bunn/m
 # Features
 - Login into your GitHub account to send authenticated gists;
 - Enable/Disable notifications when gist is uploaded (Default is off);
+- View gist list
 
 # Screenshots
+macGist in action
+
+![screenshot](./other/gist.gif)
+
 Settings Panel
 
 ![screenshot](./other/settings.png)
 
-macGist in action
 
-![screenshot](./other/gist.gif)
+gist List
+![screenshot](./other/gistList.png)
 

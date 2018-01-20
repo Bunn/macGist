@@ -11,6 +11,15 @@
 		3100E52C1EF9C3AC0065BDD9 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3100E52A1EF9C3AC0065BDD9 /* SettingsViewController.xib */; };
 		3100E52F1EF9CEA50065BDD9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100E52D1EF9CEA50065BDD9 /* LoginViewController.swift */; };
 		3100E5301EF9CEA50065BDD9 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3100E52E1EF9CEA50065BDD9 /* LoginViewController.xib */; };
+		3110C8F41FC74900007094C9 /* GistSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110C8F31FC74900007094C9 /* GistSplitViewController.swift */; };
+		3110C8F81FC74925007094C9 /* GistListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110C8F61FC74925007094C9 /* GistListViewController.swift */; };
+		3110C8F91FC74925007094C9 /* GistListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110C8F71FC74925007094C9 /* GistListViewController.xib */; };
+		3110C8FC1FC7492F007094C9 /* GistDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3110C8FA1FC7492F007094C9 /* GistDetailsViewController.swift */; };
+		3110C8FD1FC7492F007094C9 /* GistDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3110C8FB1FC7492F007094C9 /* GistDetailsViewController.xib */; };
+		3153205B200EB1790088E15B /* NSImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3153205A200EB1790088E15B /* NSImageExtension.swift */; };
+		3160831C200566F7006B7066 /* GistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160831B200566F7006B7066 /* GistCell.swift */; };
+		3160CFC71FC4CE0A00B3E756 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160CFC61FC4CE0A00B3E756 /* Gist.swift */; };
+		3160CFC91FC4D49200B3E756 /* GistFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3160CFC81FC4D49200B3E756 /* GistFile.swift */; };
 		317029881EFA9F9F00A087F8 /* TwoFactorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317029861EFA9F9F00A087F8 /* TwoFactorViewController.swift */; };
 		317029891EFA9F9F00A087F8 /* TwoFactorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 317029871EFA9F9F00A087F8 /* TwoFactorViewController.xib */; };
 		317A342F1EF9F64B005144BB /* UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317A342E1EF9F64B005144BB /* UserDefaultKeys.swift */; };
@@ -19,11 +28,13 @@
 		3180877B1EF5D9CA001712F4 /* GitHubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318087781EF5D9CA001712F4 /* GitHubRouter.swift */; };
 		3180877D1EF5DA9F001712F4 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3180877C1EF5DA9F001712F4 /* Keychain.swift */; };
 		318F73E71EFC675D00DB6864 /* Credentials.plist in Resources */ = {isa = PBXBuildFile; fileRef = 318F73E61EFC675D00DB6864 /* Credentials.plist */; };
+		319074FF1FBCE725008D068F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319074FE1FBCE725008D068F /* User.swift */; };
 		319277061EF876AC00D53B47 /* NotificationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319277051EF876AC00D53B47 /* NotificationHelper.swift */; };
 		319D3B961ED501D4000D4245 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319D3B951ED501D4000D4245 /* AppDelegate.swift */; };
 		319D3B9A1ED501D4000D4245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319D3B991ED501D4000D4245 /* Assets.xcassets */; };
 		319D3B9D1ED501D4000D4245 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319D3B9B1ED501D4000D4245 /* Main.storyboard */; };
 		319D3BA51ED50246000D4245 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319D3BA41ED50246000D4245 /* Menu.swift */; };
+		31B1C6C52013A12500DFF615 /* GistDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */; };
 		31C2536B1EF5F17100D4FE6D /* PasteboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2536A1EF5F17100D4FE6D /* PasteboardHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +43,15 @@
 		3100E52A1EF9C3AC0065BDD9 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		3100E52D1EF9CEA50065BDD9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3100E52E1EF9CEA50065BDD9 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		3110C8F31FC74900007094C9 /* GistSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistSplitViewController.swift; sourceTree = "<group>"; };
+		3110C8F61FC74925007094C9 /* GistListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistListViewController.swift; sourceTree = "<group>"; };
+		3110C8F71FC74925007094C9 /* GistListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GistListViewController.xib; sourceTree = "<group>"; };
+		3110C8FA1FC7492F007094C9 /* GistDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistDetailsViewController.swift; sourceTree = "<group>"; };
+		3110C8FB1FC7492F007094C9 /* GistDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GistDetailsViewController.xib; sourceTree = "<group>"; };
+		3153205A200EB1790088E15B /* NSImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImageExtension.swift; sourceTree = "<group>"; };
+		3160831B200566F7006B7066 /* GistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistCell.swift; sourceTree = "<group>"; };
+		3160CFC61FC4CE0A00B3E756 /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
+		3160CFC81FC4D49200B3E756 /* GistFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistFile.swift; sourceTree = "<group>"; };
 		317029861EFA9F9F00A087F8 /* TwoFactorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoFactorViewController.swift; sourceTree = "<group>"; };
 		317029871EFA9F9F00A087F8 /* TwoFactorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TwoFactorViewController.xib; sourceTree = "<group>"; };
 		317A342E1EF9F64B005144BB /* UserDefaultKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultKeys.swift; sourceTree = "<group>"; };
@@ -40,6 +60,7 @@
 		318087781EF5D9CA001712F4 /* GitHubRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GitHubRouter.swift; sourceTree = "<group>"; };
 		3180877C1EF5DA9F001712F4 /* Keychain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		318F73E61EFC675D00DB6864 /* Credentials.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Credentials.plist; sourceTree = "<group>"; };
+		319074FE1FBCE725008D068F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		319277051EF876AC00D53B47 /* NotificationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationHelper.swift; sourceTree = "<group>"; };
 		319D3B921ED501D4000D4245 /* macGist.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = macGist.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319D3B951ED501D4000D4245 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +68,7 @@
 		319D3B9C1ED501D4000D4245 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319D3B9E1ED501D4000D4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		319D3BA41ED50246000D4245 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistDetailHeader.swift; sourceTree = "<group>"; };
 		31C2536A1EF5F17100D4FE6D /* PasteboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -70,8 +92,23 @@
 				3100E52A1EF9C3AC0065BDD9 /* SettingsViewController.xib */,
 				317029861EFA9F9F00A087F8 /* TwoFactorViewController.swift */,
 				317029871EFA9F9F00A087F8 /* TwoFactorViewController.xib */,
+				3110C8F51FC74907007094C9 /* GistViewer */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3110C8F51FC74907007094C9 /* GistViewer */ = {
+			isa = PBXGroup;
+			children = (
+				3160831B200566F7006B7066 /* GistCell.swift */,
+				3110C8F31FC74900007094C9 /* GistSplitViewController.swift */,
+				3110C8F61FC74925007094C9 /* GistListViewController.swift */,
+				3110C8F71FC74925007094C9 /* GistListViewController.xib */,
+				3110C8FA1FC7492F007094C9 /* GistDetailsViewController.swift */,
+				3110C8FB1FC7492F007094C9 /* GistDetailsViewController.xib */,
+				31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */,
+			);
+			name = GistViewer;
 			sourceTree = "<group>";
 		};
 		318087751EF5D9C2001712F4 /* GitHub */ = {
@@ -80,6 +117,9 @@
 				318087761EF5D9CA001712F4 /* GitHubAPI.swift */,
 				318087771EF5D9CA001712F4 /* GitHubCredential.swift */,
 				318087781EF5D9CA001712F4 /* GitHubRouter.swift */,
+				319074FE1FBCE725008D068F /* User.swift */,
+				3160CFC61FC4CE0A00B3E756 /* Gist.swift */,
+				3160CFC81FC4D49200B3E756 /* GistFile.swift */,
 			);
 			name = GitHub;
 			sourceTree = "<group>";
@@ -120,6 +160,7 @@
 				319277051EF876AC00D53B47 /* NotificationHelper.swift */,
 				31C2536A1EF5F17100D4FE6D /* PasteboardHelper.swift */,
 				317A342E1EF9F64B005144BB /* UserDefaultKeys.swift */,
+				3153205A200EB1790088E15B /* NSImageExtension.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -167,9 +208,8 @@
 				TargetAttributes = {
 					319D3B911ED501D4000D4245 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DNXBQ46VRB;
 						LastSwiftMigration = 0900;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -198,6 +238,8 @@
 			files = (
 				317029891EFA9F9F00A087F8 /* TwoFactorViewController.xib in Resources */,
 				3100E5301EF9CEA50065BDD9 /* LoginViewController.xib in Resources */,
+				3110C8FD1FC7492F007094C9 /* GistDetailsViewController.xib in Resources */,
+				3110C8F91FC74925007094C9 /* GistListViewController.xib in Resources */,
 				319D3B9A1ED501D4000D4245 /* Assets.xcassets in Resources */,
 				318F73E71EFC675D00DB6864 /* Credentials.plist in Resources */,
 				3100E52C1EF9C3AC0065BDD9 /* SettingsViewController.xib in Resources */,
@@ -212,17 +254,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B1C6C52013A12500DFF615 /* GistDetailHeader.swift in Sources */,
+				3160CFC91FC4D49200B3E756 /* GistFile.swift in Sources */,
+				319074FF1FBCE725008D068F /* User.swift in Sources */,
 				319D3BA51ED50246000D4245 /* Menu.swift in Sources */,
 				318087791EF5D9CA001712F4 /* GitHubAPI.swift in Sources */,
 				319277061EF876AC00D53B47 /* NotificationHelper.swift in Sources */,
 				319D3B961ED501D4000D4245 /* AppDelegate.swift in Sources */,
 				317029881EFA9F9F00A087F8 /* TwoFactorViewController.swift in Sources */,
+				3160CFC71FC4CE0A00B3E756 /* Gist.swift in Sources */,
 				3180877B1EF5D9CA001712F4 /* GitHubRouter.swift in Sources */,
 				317A342F1EF9F64B005144BB /* UserDefaultKeys.swift in Sources */,
+				3110C8F41FC74900007094C9 /* GistSplitViewController.swift in Sources */,
+				3160831C200566F7006B7066 /* GistCell.swift in Sources */,
+				3110C8F81FC74925007094C9 /* GistListViewController.swift in Sources */,
+				3110C8FC1FC7492F007094C9 /* GistDetailsViewController.swift in Sources */,
 				31C2536B1EF5F17100D4FE6D /* PasteboardHelper.swift in Sources */,
 				3180877A1EF5D9CA001712F4 /* GitHubCredential.swift in Sources */,
 				3180877D1EF5DA9F001712F4 /* Keychain.swift in Sources */,
 				3100E52F1EF9CEA50065BDD9 /* LoginViewController.swift in Sources */,
+				3153205B200EB1790088E15B /* NSImageExtension.swift in Sources */,
 				3100E52B1EF9C3AC0065BDD9 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,12 +402,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = DNXBQ46VRB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = macGist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.idevzilla.macGist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
@@ -366,12 +419,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = DNXBQ46VRB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = macGist/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.idevzilla.macGist;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
 			};
