@@ -34,6 +34,7 @@
 		319D3B9A1ED501D4000D4245 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 319D3B991ED501D4000D4245 /* Assets.xcassets */; };
 		319D3B9D1ED501D4000D4245 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 319D3B9B1ED501D4000D4245 /* Main.storyboard */; };
 		319D3BA51ED50246000D4245 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319D3BA41ED50246000D4245 /* Menu.swift */; };
+		31B1C6C52013A12500DFF615 /* GistDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */; };
 		31C2536B1EF5F17100D4FE6D /* PasteboardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C2536A1EF5F17100D4FE6D /* PasteboardHelper.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +68,7 @@
 		319D3B9C1ED501D4000D4245 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		319D3B9E1ED501D4000D4245 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		319D3BA41ED50246000D4245 /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GistDetailHeader.swift; sourceTree = "<group>"; };
 		31C2536A1EF5F17100D4FE6D /* PasteboardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasteboardHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -104,6 +106,7 @@
 				3110C8F71FC74925007094C9 /* GistListViewController.xib */,
 				3110C8FA1FC7492F007094C9 /* GistDetailsViewController.swift */,
 				3110C8FB1FC7492F007094C9 /* GistDetailsViewController.xib */,
+				31B1C6C42013A12500DFF615 /* GistDetailHeader.swift */,
 			);
 			name = GistViewer;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B1C6C52013A12500DFF615 /* GistDetailHeader.swift in Sources */,
 				3160CFC91FC4D49200B3E756 /* GistFile.swift in Sources */,
 				319074FF1FBCE725008D068F /* User.swift in Sources */,
 				319D3BA51ED50246000D4245 /* Menu.swift in Sources */,

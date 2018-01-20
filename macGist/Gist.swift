@@ -15,7 +15,8 @@ struct Gist: Codable {
     let createdAt: Date
     let updatedAt: Date
     let description: String
-    
+    let htmlURL: URL
+
     /*
      GitHub API returns the files inside a dictionary with dynamic keys instead of an array
      the files property is a mapping one to one to the API, which is an object that contains multiple objects
@@ -34,6 +35,7 @@ struct Gist: Codable {
         case publicItem = "public"
         case createdAt = "created_at"
         case updatedAt = "updated_at"
+        case htmlURL = "html_url"
         case files
     }
 }

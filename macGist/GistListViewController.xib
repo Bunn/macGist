@@ -102,6 +102,9 @@
                             </tableView>
                         </subviews>
                     </clipView>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="KAr-Pd-R9f"/>
+                    </constraints>
                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="SmS-QG-z30">
                         <rect key="frame" x="1" y="119" width="223" height="15"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -126,6 +129,6 @@
         </customView>
     </objects>
     <resources>
-        <image name="lock_closed" width="17.600000381469727" height="17.600000381469727"/>
+        <image name="lock_closed" width="8.8000001907348633" height="8.8000001907348633"/>
     </resources>
 </document>
