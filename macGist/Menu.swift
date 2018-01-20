@@ -86,18 +86,22 @@ class Menu {
     //MARK: - Button Methods
     
     @objc private func opeGists() {
+        NSApp.activate(ignoringOtherApps: true)
         let gists = GistSplitViewController()
         let window = NSWindow(contentViewController: gists)
         windowController = NSWindowController(window: window)
         windowController?.showWindow(self)
+        windowController?.window?.makeKey()
     }
     
     @objc private func openSettings() {
+        NSApp.activate(ignoringOtherApps: true)
         let settings = SettingsViewController()
         settings.delegate = self
         let window = NSWindow(contentViewController: settings)
         windowController = NSWindowController(window: window)
         windowController?.showWindow(self)
+        windowController?.window?.makeKey()
     }
     
     @objc private func quit() {
