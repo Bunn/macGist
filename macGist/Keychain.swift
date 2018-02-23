@@ -3,6 +3,8 @@
 
 import Foundation
 
+typealias QueryDictionary = [CFString:AnyObject]
+
 struct KeychainConfiguration {
     static let serviceName = "macGist"
     static let accessGroup = "com.idevzilla.macGist"
@@ -18,44 +20,41 @@ struct KeychainConfiguration {
                 case clientId
                 case clientSecret
                 
-                func query() -> [String:AnyObject] {
+                func query() -> QueryDictionary {
                     let query = KeychainConfiguration.keychainQuery(withService: KeychainConfiguration.GitHub.serviceName,
-                                                             account: self.rawValue,
-                                                             accessGroup: KeychainConfiguration.accessGroup)
+                                                                    account: self.rawValue,
+                                                                    accessGroup: KeychainConfiguration.accessGroup)
                     return query
                 }
             }
         }
         
-        static func query() -> [String:AnyObject] {
+        static func query() -> QueryDictionary {
             let query = KeychainConfiguration.keychainQuery(withService: KeychainConfiguration.GitHub.serviceName,
-                                                     account: KeychainConfiguration.GitHub.account,
-                                                     accessGroup: KeychainConfiguration.accessGroup)
+                                                            account: KeychainConfiguration.GitHub.account,
+                                                            accessGroup: KeychainConfiguration.accessGroup)
             return query
         }
     }
     
-    static func query() -> [String:AnyObject] {
+    static func query() -> QueryDictionary {
         let query = KeychainConfiguration.keychainQuery(withService: KeychainConfiguration.serviceName,
                                                         account: KeychainConfiguration.account,
                                                         accessGroup: KeychainConfiguration.accessGroup)
         return query
     }
     
-    private static func keychainQuery(withService service: String? = nil, account: String? = nil, accessGroup: String? = nil) -> [String : AnyObject] {
-        var query = [String : AnyObject]()
-        query[kSecClass as String] = kSecClassGenericPassword
-        
-        if let service = service {
-            query[kSecAttrService as String] = service as AnyObject?
-        }
+    private static func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> QueryDictionary {
+        var query = QueryDictionary()
+        query[kSecClass] = kSecClassGenericPassword
+        query[kSecAttrService] = service as AnyObject
         
         if let account = account {
-            query[kSecAttrAccount as String] = account as AnyObject?
+            query[kSecAttrAccount] = account as AnyObject
         }
         
         if let accessGroup = accessGroup {
-            query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
+            query[kSecAttrAccessGroup] = accessGroup as AnyObject
         }
         
         return query
@@ -76,13 +75,13 @@ struct Keychain {
     }
     
     func save(token password: String) throws {
-        let encodedPassword = password.data(using: String.Encoding.utf8)!
+        let encodedPassword = password.data(using: .utf8)!
         
         do {
-            try _ = readToken()
+            try readToken()
             
-            var attributesToUpdate = [String : AnyObject]()
-            attributesToUpdate[kSecValueData as String] = encodedPassword as AnyObject?
+            var attributesToUpdate = QueryDictionary()
+            attributesToUpdate[kSecValueData] = encodedPassword as AnyObject
             
             let query = KeychainConfiguration.query()
             let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
@@ -90,7 +89,7 @@ struct Keychain {
             guard status == noErr else { throw KeychainError.unhandledError(status: status) }
         } catch KeychainError.noPassword {
             var newItem = KeychainConfiguration.query()
-            newItem[kSecValueData as String] = encodedPassword as AnyObject?
+            newItem[kSecValueData] = encodedPassword as AnyObject
             
             let status = SecItemAdd(newItem as CFDictionary, nil)
             
@@ -98,12 +97,12 @@ struct Keychain {
         }
     }
     
-    func readToken() throws -> String  {
+    @discardableResult func readToken() throws -> String  {
         var query = KeychainConfiguration.query()
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnAttributes as String] = kCFBooleanTrue
-        query[kSecReturnData as String] = kCFBooleanTrue
+        query[kSecMatchLimit] = kSecMatchLimitOne
+        query[kSecReturnAttributes] = kCFBooleanTrue
+        query[kSecReturnData] = kCFBooleanTrue
         
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
@@ -113,9 +112,9 @@ struct Keychain {
         guard status != errSecItemNotFound else { throw KeychainError.noPassword }
         guard status == noErr else { throw KeychainError.unhandledError(status: status) }
         
-        guard let existingItem = queryResult as? [String : AnyObject],
-            let passwordData = existingItem[kSecValueData as String] as? Data,
-            let password = String(data: passwordData, encoding: String.Encoding.utf8)
+        guard let existingItem = queryResult as? QueryDictionary,
+            let passwordData = existingItem[kSecValueData] as? Data,
+            let password = String(data: passwordData, encoding: .utf8)
             else {
                 throw KeychainError.unexpectedPasswordData
         }
@@ -145,13 +144,13 @@ struct Keychain {
     }
     
     func save(gitHubClientId: String) throws {
-        let encodedGitHubClientId = gitHubClientId.data(using: String.Encoding.utf8)!
+        let encodedGitHubClientId = gitHubClientId.data(using: .utf8)!
         
         do {
-            try _ = readGitHubClientId()
+            try readGitHubClientId()
             
-            var attributesToUpdate = [String : AnyObject]()
-            attributesToUpdate[kSecValueData as String] = encodedGitHubClientId as AnyObject?
+            var attributesToUpdate = QueryDictionary()
+            attributesToUpdate[kSecValueData] = encodedGitHubClientId as AnyObject
             
             let query = KeychainConfiguration.GitHub.Gist.Account.clientId.query()
             let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
@@ -159,7 +158,7 @@ struct Keychain {
             guard status == noErr else { throw KeychainError.unhandledError(status: status) }
         } catch KeychainError.noGitHubClientId {
             var newItem = KeychainConfiguration.GitHub.Gist.Account.clientId.query()
-            newItem[kSecValueData as String] = encodedGitHubClientId as AnyObject?
+            newItem[kSecValueData] = encodedGitHubClientId as AnyObject
             
             let status = SecItemAdd(newItem as CFDictionary, nil)
             
@@ -167,12 +166,12 @@ struct Keychain {
         }
     }
     
-    func readGitHubClientId() throws -> String {
+    @discardableResult func readGitHubClientId() throws -> String {
         var query = KeychainConfiguration.GitHub.Gist.Account.clientId.query()
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnAttributes as String] = kCFBooleanTrue
-        query[kSecReturnData as String] = kCFBooleanTrue
+        query[kSecMatchLimit] = kSecMatchLimitOne
+        query[kSecReturnAttributes] = kCFBooleanTrue
+        query[kSecReturnData] = kCFBooleanTrue
         
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
@@ -182,9 +181,9 @@ struct Keychain {
         guard status != errSecItemNotFound else { throw KeychainError.noGitHubClientId }
         guard status == noErr else { throw KeychainError.unhandledError(status: status) }
         
-        guard let existingItem = queryResult as? [String : AnyObject],
-            let passwordData = existingItem[kSecValueData as String] as? Data,
-            let password = String(data: passwordData, encoding: String.Encoding.utf8)
+        guard let existingItem = queryResult as? QueryDictionary,
+            let passwordData = existingItem[kSecValueData] as? Data,
+            let password = String(data: passwordData, encoding: .utf8)
             else {
                 throw KeychainError.unexpectedGitHubClientIdData
         }
@@ -193,13 +192,13 @@ struct Keychain {
     }
     
     func save(gitHubClientSecret: String) throws {
-        let encodedGitHubClientSecret = gitHubClientSecret.data(using: String.Encoding.utf8)!
+        let encodedGitHubClientSecret = gitHubClientSecret.data(using: .utf8)!
         
         do {
-            try _ = readGitHubClientSecret()
+            try readGitHubClientSecret()
             
-            var attributesToUpdate = [String : AnyObject]()
-            attributesToUpdate[kSecValueData as String] = encodedGitHubClientSecret as AnyObject?
+            var attributesToUpdate = QueryDictionary()
+            attributesToUpdate[kSecValueData] = encodedGitHubClientSecret as AnyObject
             
             let query = KeychainConfiguration.GitHub.Gist.Account.clientSecret.query()
             let status = SecItemUpdate(query as CFDictionary, attributesToUpdate as CFDictionary)
@@ -208,7 +207,7 @@ struct Keychain {
         }
         catch KeychainError.noGitHubClientSecret {
             var newItem = KeychainConfiguration.GitHub.Gist.Account.clientSecret.query()
-            newItem[kSecValueData as String] = encodedGitHubClientSecret as AnyObject?
+            newItem[kSecValueData] = encodedGitHubClientSecret as AnyObject
             
             let status = SecItemAdd(newItem as CFDictionary, nil)
             
@@ -216,12 +215,12 @@ struct Keychain {
         }
     }
     
-    func readGitHubClientSecret() throws -> String {
+    @discardableResult func readGitHubClientSecret() throws -> String {
         var query = KeychainConfiguration.GitHub.Gist.Account.clientSecret.query()
         
-        query[kSecMatchLimit as String] = kSecMatchLimitOne
-        query[kSecReturnAttributes as String] = kCFBooleanTrue
-        query[kSecReturnData as String] = kCFBooleanTrue
+        query[kSecMatchLimit] = kSecMatchLimitOne
+        query[kSecReturnAttributes] = kCFBooleanTrue
+        query[kSecReturnData] = kCFBooleanTrue
         
         var queryResult: AnyObject?
         let status = withUnsafeMutablePointer(to: &queryResult) {
@@ -231,29 +230,13 @@ struct Keychain {
         guard status != errSecItemNotFound else { throw KeychainError.noGitHubClientSecret }
         guard status == noErr else { throw KeychainError.unhandledError(status: status) }
         
-        guard let existingItem = queryResult as? [String : AnyObject],
-            let passwordData = existingItem[kSecValueData as String] as? Data,
-            let password = String(data: passwordData, encoding: String.Encoding.utf8)
+        guard let existingItem = queryResult as? QueryDictionary,
+            let passwordData = existingItem[kSecValueData] as? Data,
+            let password = String(data: passwordData, encoding: .utf8)
             else {
                 throw KeychainError.unexpectedGitHubClientSecretData
         }
         
         return password
-    }
-    
-    private func keychainQuery(withService service: String, account: String? = nil, accessGroup: String? = nil) -> [String : AnyObject] {
-        var query = [String : AnyObject]()
-        query[kSecClass as String] = kSecClassGenericPassword
-        query[kSecAttrService as String] = service as AnyObject?
-        
-        if let account = account {
-            query[kSecAttrAccount as String] = account as AnyObject?
-        }
-        
-        if let accessGroup = accessGroup {
-            query[kSecAttrAccessGroup as String] = accessGroup as AnyObject?
-        }
-        
-        return query
     }
 }

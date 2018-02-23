@@ -65,10 +65,14 @@ class Menu {
     }
     
     private func displaySuccessIcon() {
-        item.image = Images.checkmarkIcon.image
+        DispatchQueue.main.async {
+            self.item.image = Images.checkmarkIcon.image
+        }
+        
         let deadlineTime = DispatchTime.now() + .seconds(2)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
-            self.item.image = Images.standardIcon.image        }
+            self.item.image = Images.standardIcon.image
+        }
     }
     
     private func postGist(authenticated: Bool) {
