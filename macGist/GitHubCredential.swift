@@ -8,21 +8,38 @@
 
 import Foundation
 
-enum GitHubCredential: String {
-    case clientSecret
-    case clientID
+enum GitHubCredentialManager {
+    static private let keychain = Keychain()
     
-    var value: String {
-        guard let path = Bundle.main.path(forResource: "Credentials", ofType: "plist"),
-            let dict = NSDictionary(contentsOfFile: path) as? [String: AnyObject] else { fatalError("No plist found") }
+    static var clientId: String? {
+        get {
+            return try? keychain.readGitHubClientId()
+        }
         
-        switch self {
-        case .clientID:
-            guard let value = dict["GitHubClientID"] as? String else { fatalError("GitHubClientID not found") }
-            return value
-        case .clientSecret:
-            guard let value = dict["GitHubSecret"] as? String else { fatalError("GitHubSecret not found") }
-            return value
+        set {
+            do {
+                if let id = newValue {
+                    try keychain.save(gitHubClientId: id)
+                }
+            } catch let error {
+                print("Error trying to save client id:: \(error)")
+            }
+        }
+    }
+    
+    static var clientSecret: String? {
+        get {
+            return try? keychain.readGitHubClientSecret()
+        }
+        
+        set {
+            do {
+                if let secret = newValue {
+                    try keychain.save(gitHubClientSecret: secret)
+                }
+            } catch let error {
+                print("Error trying to save client secret:: \(error)")
+            }
         }
     }
 }
