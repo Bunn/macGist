@@ -13,12 +13,7 @@ enum GitHubCredentialManager {
     
     static var clientId: String? {
         get {
-            do {
-                let clientId = try keychain.readGitHubClientId()
-                return clientId
-            } catch {
-                return nil
-            }
+            return try? keychain.readGitHubClientId()
         }
         
         set {
@@ -34,12 +29,7 @@ enum GitHubCredentialManager {
     
     static var clientSecret: String? {
         get {
-            do {
-                let clientSecret = try keychain.readGitHubClientSecret()
-                return clientSecret
-            } catch {
-                return nil
-            }
+            return try? keychain.readGitHubClientSecret()
         }
         
         set {
