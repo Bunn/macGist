@@ -14,13 +14,17 @@ class LoginViewController: NSViewController {
     @IBOutlet private weak var usernameTextField: NSTextField!
     @IBOutlet private weak var spinner: NSProgressIndicator!
     @IBOutlet private weak var loginButton: NSButton!
+    @IBOutlet private weak var githubClientIdTextField: NSTextField!
+    @IBOutlet private weak var githubClientSecretTextField: NSTextField!
     @IBOutlet weak var errorLabel: NSTextField!
+    
     weak var delegate: LoginViewControllerDelegate?
     private let githubAPI = GitHubAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupCredentialsUI()
     }
     
     @IBAction private func loginButtonClicked(_ sender: NSButton) {
@@ -30,6 +34,11 @@ class LoginViewController: NSViewController {
     
     @IBAction private func cancelButtonClicked(_ sender: NSButton) {
         delegate?.didFinish(controller: self)
+    }
+    
+    @IBAction func saveButtonClicked(_ sender: NSButton) {
+        GitHubCredentialManager.clientId = githubClientIdTextField.stringValue
+        GitHubCredentialManager.clientSecret = githubClientSecretTextField.stringValue
     }
     
     fileprivate func setupUI() {
@@ -76,10 +85,15 @@ class LoginViewController: NSViewController {
                     self.displayError(message: "Bad username or password")
                 } else {
                     UserDefaults.standard.set(self.usernameTextField.stringValue, forKey: UserDefaultKeys.usernameKey.rawValue)
-                   self.delegate?.didFinish(controller: self)
+                    self.delegate?.didFinish(controller: self)
                 }
             }
         }
+    }
+    
+    private func setupCredentialsUI() {
+        githubClientIdTextField.stringValue = GitHubCredentialManager.clientId ?? ""
+        githubClientSecretTextField.stringValue = GitHubCredentialManager.clientSecret ?? ""
     }
 }
 
