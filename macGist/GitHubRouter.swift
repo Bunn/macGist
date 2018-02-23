@@ -26,7 +26,7 @@ enum GitHubRouter {
     private var path: String {
         switch self {
         case .auth:
-            return "authorizations/clients/\(GitHubCredentialManager.clientId!)/\(UUID.init())"
+            return "authorizations/clients/\(GitHubCredentialManager.clientId ?? "")/\(UUID.init())"
         case .gist( _ , let authenticated):
             if authenticated {
                 return "gists?access_token=\(accessToken)"
