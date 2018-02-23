@@ -66,7 +66,7 @@ class Menu {
     
     private func displaySuccessIcon() {
         DispatchQueue.main.async {
-            item.image = Images.checkmarkIcon.image
+            self.item.image = Images.checkmarkIcon.image
         }
         
         let deadlineTime = DispatchTime.now() + .seconds(2)
