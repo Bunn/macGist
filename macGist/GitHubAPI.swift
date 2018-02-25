@@ -31,7 +31,7 @@ struct GitHubAPI {
     
     var token: String? {
         do {
-            let password = try Keychain().readPassword()
+            let password = try Keychain().readToken()
             return password
         } catch {
             return nil
@@ -85,9 +85,11 @@ struct GitHubAPI {
     
     func logout() {
         do {
-            try Keychain().deleteItem()
+            try Keychain().deleteToken()
+            try Keychain().deleteGitHubClientId()
+            try Keychain().deleteGitHubClientSecret()
         } catch {
-            fatalError("Error deleting keychain item - \(error)")
+            fatalError("Error deleting keychain item\n\(error)")
         }
     }
     
@@ -139,9 +141,11 @@ struct GitHubAPI {
     
     func authenticate (username: String, password: String, twoFactorCode: String? = nil, completion: @escaping (Error?) -> Void) {
         let scopes = ["gist"]
-        let params  = ["client_secret" : GitHubCredential.clientSecret.value,
-                       "scopes" : scopes,
-                       "note" : "testNote"] as [String : Any]
+        let params: [String : Any]  = [
+            "client_secret" : GitHubCredentialManager.clientSecret as Any,
+            "scopes" : scopes,
+            "note" : "testNote"
+        ]
         
         guard var request = GitHubRouter.auth(params).request else {
             completion(GitHubAPIError.invalidRequest)
@@ -183,7 +187,7 @@ struct GitHubAPI {
             }
             
             do {
-                try Keychain().savePassword(token)
+                try Keychain().save(token: token)
                 completion(nil)
             } catch {
                 completion(error)
