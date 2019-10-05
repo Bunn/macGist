@@ -18,9 +18,9 @@ enum Images {
         
         switch self {
         case .standardIcon:
-            image = NSImage(named: NSImage.Name(rawValue: "icon"))
+            image = NSImage(named: "icon")
         case .checkmarkIcon:
-            image = NSImage(named: NSImage.Name(rawValue: "check_white_icon"))
+            image = NSImage(named: "check_white_icon")
         }
         image?.isTemplate = true
         return image

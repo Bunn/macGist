@@ -65,7 +65,7 @@ class LoginViewController: NSViewController {
     private func openTwoFactorController() {
         let twoFactorController = TwoFactorViewController()
         twoFactorController.delegate = self
-        presentViewControllerAsSheet(twoFactorController)
+        presentAsSheet(twoFactorController)
     }
     
     fileprivate func authenticate(twoFactorCode: String? = nil) {

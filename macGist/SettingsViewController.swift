@@ -50,7 +50,7 @@ class SettingsViewController: NSViewController {
         } else {
             let loginViewController = LoginViewController()
             loginViewController.delegate = self
-            presentViewControllerAsSheet(loginViewController)
+            presentAsSheet(loginViewController)
         }
     }
 }
