@@ -127,7 +127,7 @@ struct GitHubAPI {
                 return
             }
             
-            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String : Any] {
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
                 if let htmlURL = json["html_url"] as? String {
                     completion(nil, htmlURL)
                 }

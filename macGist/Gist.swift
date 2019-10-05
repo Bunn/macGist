@@ -25,7 +25,7 @@ struct Gist: Codable {
     */
     private let files: GistFiles
     var gistFiles : [GistFile] {
-        return files.gists.flatMap{$0}
+        return files.gists.compactMap{$0}
     }
     
     enum CodingKeys: String, CodingKey {
