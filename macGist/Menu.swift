@@ -9,20 +9,23 @@
 import Foundation
 import AppKit
 
-enum Images {
+public enum Images {
     case standardIcon
     case checkmarkIcon
+    case failureIcon
     
-    var image: NSImage? {
-        var image: NSImage?
+    var image: NSImage {
+        var image: NSImage
         
         switch self {
         case .standardIcon:
-            image = NSImage(named: "icon")
+            image = NSImage(named: "icon")!
         case .checkmarkIcon:
-            image = NSImage(named: "check_white_icon")
+            image = NSImage(named: "check_white_icon")!
+        case .failureIcon:
+            image = NSImage(named: "x-icon")!
         }
-        image?.isTemplate = true
+        image.isTemplate = true
         return image
     }
 }
@@ -39,14 +42,10 @@ class Menu {
         let githubAPI = GitHubAPI()
         
         if githubAPI.isAuthenticated {
-            let authenticatedItem = NSMenuItem(title: "Authenticated Gist", action: #selector(Menu.createAuthenticatedGist), keyEquivalent: "")
+            let authenticatedItem = NSMenuItem(title: "Post Gist", action: #selector(Menu.createAuthenticatedGist), keyEquivalent: "")
             authenticatedItem.target = self
             menu.addItem(authenticatedItem)
         }
-        
-        let anonymousItem = NSMenuItem(title: "Anonymous Gist", action: #selector(Menu.createAnonymousGist), keyEquivalent: "")
-        anonymousItem.target = self
-        menu.addItem(anonymousItem)
         
         let settingsMenuItem = NSMenuItem(title: "Settings", action: #selector(Menu.openSettings), keyEquivalent: "")
         settingsMenuItem.target = self
@@ -65,8 +64,16 @@ class Menu {
     }
     
     private func displaySuccessIcon() {
+        displayTemporary(icon: Images.checkmarkIcon.image)
+    }
+    
+    private func displayFailureIcon() {
+        displayTemporary(icon: Images.failureIcon.image)
+    }
+    
+    private func displayTemporary(icon: NSImage) {
         DispatchQueue.main.async {
-            self.item.image = Images.checkmarkIcon.image
+            self.item.image = icon
         }
         
         let deadlineTime = DispatchTime.now() + .seconds(2)
@@ -83,6 +90,8 @@ class Menu {
                 PasteboardHelper().save(string: value)
                 self.displaySuccessIcon()
                 self.notificationHelper.sendNotification(withIdentifier: value)
+            } else {
+                self.displayFailureIcon()
             }
         }
     }
